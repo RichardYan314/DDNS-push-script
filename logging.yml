@@ -1,0 +1,39 @@
+# https://docs.python.org/3.7/library/logging.config.html#dictionary-schema-details
+
+version: 1
+formatters:
+  full:
+    format: '%(asctime)s %(filename)+10s:%(lineno)-3d %(levelname)-8s %(message)s'
+    datefmt: '%m-%d %H:%M:%S'
+  simple:
+    format: '%(levelname)-8s %(message)s'
+handlers:
+  file:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: full
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+  memory:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: full
+loggers:
+  file:
+    level: DEBUG
+    handlers: [file]
+    propagate: no
+  console:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+  memory:
+    level: DEBUG
+    handlers: [memory]
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [file, console, memory]
