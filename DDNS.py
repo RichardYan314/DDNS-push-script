@@ -120,7 +120,7 @@ class DNSPod(DDNS, secret_config.DNSPod_config):
             }
 
             if not isNaked:
-                query.sub_domain = record
+                query["sub_domain"] = record
 
             # TODO
             #Out - String - InputObject $query
