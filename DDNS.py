@@ -228,7 +228,7 @@ class NameSilo(DDNS, secret_config.NameSilo_config):
 
         # Only update the record if necessary.
         if currentIP != recordIP:
-            logging.info(f"Updating A record for {record}.{domain} to {urrentIP}")
+            logging.info(f"Updating A record for {record}.{domain} to {currentIP}")
             query = {
                 'domain': domain,
                 'rrid': recordID,
