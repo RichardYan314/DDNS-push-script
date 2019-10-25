@@ -3,9 +3,21 @@ import secret_config
 from datetime import datetime
 today = datetime.today()
 
+import argparse
+
+parser = argparse.ArgumentParser(description='DDNS.')
+parser.add_argument('--debug', dest='debug', action='store_const',
+                    const=".test", default="",
+                    help='run in debug mode (write to test.log)')
+parser.add_argument('--forceSend', dest='forceSend', action='store_const',
+                    const=True, default=False,
+                    help='force sending email')
+
+args = parser.parse_args()
+
 from pathlib import Path
 script_root = Path(__file__).parent
-logfile = script_root / ("%d.%d.log" % (today.year, today.month))
+logfile = script_root / ("%d.%d%s.log" % (today.year, today.month, args.debug))
 
 import yaml
 with open("logging.yml", 'r') as f:
@@ -253,7 +265,9 @@ pushed |= DNSPod.dnsUpdateRecord(secret_config.domain, secret_config.record, sec
 logging.info('===== Pushing to NameSilo =====')
 pushed |= NameSilo.dnsUpdateRecord(secret_config.domain, secret_config.record, secret_config.type)
 
-if pushed:
+
+if args.forceSend or pushed:
+    logging.info('===== Sending Email =====')
     try:
         log = log_acc.getvalue()
         log_acc.close()
