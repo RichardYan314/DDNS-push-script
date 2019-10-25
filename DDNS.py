@@ -274,7 +274,7 @@ if args.forceSend or pushed:
 
         # TODO find a better way of doing this
         import sys
-        sys.path.append(str(script_root.parent / 'SendEmail'))
+        sys.path.insert(0, str(script_root.parent / 'SendEmail'))
         from sendEmail import send
 
         today = datetime.today()
