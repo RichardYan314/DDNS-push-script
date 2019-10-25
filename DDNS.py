@@ -236,7 +236,7 @@ class NameSilo(DDNS, secret_config.NameSilo_config):
                 'rrttl': 7207,
             }
             if isNaked == False:
-                query.rrhost = record
+                query["rrhost"] = record
             # TODO
             #Out-String -InputObject $query
             update = NameSilo.callAPI('api/dnsUpdateRecord', query)
