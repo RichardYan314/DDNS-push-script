@@ -112,5 +112,11 @@ pip-selfcheck.json
 
 # End of https://www.gitignore.io/api/venv,pycharm
 
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
 *.log
 secret_config.py
