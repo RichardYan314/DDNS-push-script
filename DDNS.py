@@ -16,7 +16,7 @@ parser.add_argument('--forceSend', dest='forceSend', action='store_const',
 args = parser.parse_args()
 
 from pathlib import Path
-script_root = Path(__file__).parent
+script_root = Path(__file__).resolve().parent
 logfile = script_root / ("%d.%d%s.log" % (today.year, today.month, args.debug))
 
 import yaml
