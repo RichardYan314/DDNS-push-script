@@ -261,9 +261,11 @@ class NameSilo(DDNS, secret_config.NameSilo_config):
 
 pushed = False
 logging.info('===== Pushing to DNSPod =====')
-pushed |= DNSPod.dnsUpdateRecord(secret_config.domain, secret_config.record, secret_config.type)
+for apiParams in secret_config.apiParamsLst:
+    pushed |= DNSPod.dnsUpdateRecord(*apiParams)
 logging.info('===== Pushing to NameSilo =====')
-pushed |= NameSilo.dnsUpdateRecord(secret_config.domain, secret_config.record, secret_config.type)
+for apiParams in secret_config.apiParamsLst:
+    pushed |= NameSilo.dnsUpdateRecord(*apiParams)
 
 
 if args.forceSend or pushed:
