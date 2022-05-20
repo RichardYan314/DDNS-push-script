@@ -65,7 +65,7 @@ class DNSPod(DDNS, secret_config.DNSPod_config):
         except Exception as e:
             # TODO
             logging.error(e)
-            logging.error("Code: $(e.Exception.Response.StatusCode.value__)")
+            logging.error(f"Code: $(e.Exception.Response.StatusCode.value__)")
             logging.error("StatusDescription: $(e.Exception.Response.StatusDescription)")
             raise Exception("API error, see log")
 
